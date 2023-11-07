@@ -9,7 +9,9 @@ export default async function page() {
     <main>
       {notes.map((note) => (
         <div key={note.id} className="p-3">
-          <Link href={`notes/${note.id}`}>{formatPrismaDate(note.name)}</Link>
+          <Link href={`notes/${note.id}`} prefetch>
+            {formatPrismaDate(note.name)}
+          </Link>
         </div>
       ))}
     </main>
