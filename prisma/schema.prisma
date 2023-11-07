@@ -1,0 +1,23 @@
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Note {
+    id      Int       @id @default(autoincrement())
+    name    DateTime  @default(now())
+    updates Updates[]
+}
+
+model Updates {
+    id      Int      @id @default(autoincrement())
+    title   DateTime @default(now())
+    content String?
+    Note    Note?    @relation(fields: [noteId], references: [id])
+    noteId  Int?
+}
